@@ -2,8 +2,8 @@
 
 **Author:** Ilya Afanasyev ¹,²
 
-*¹   Innopolis University, Innopolis, Russia  
-*²   Saint Petersburg Electrotechnical University "LETI", St. Petersburg, Russia  
+¹   Innopolis University, Innopolis, Russia  
+²   Saint Petersburg Electrotechnical University "LETI", St. Petersburg, Russia  
 
 [arXiv Paper](INSERT_ARXIV_LINK_HERE) | [GitHub Code](INSERT_GITHUB_LINK_HERE) | [RoNIN Dataset](INSERT_DATA_LINK_HERE)
 
