@@ -14,23 +14,38 @@
 
 ## Abstract
 
-Autonomous agents operating in dynamic 3D environments—from wearable devices to embodied systems—require robust pose estimation that preserves the geometric structure of rigid-body motion. Traditional filtering approaches often decouple rotation and translation, leading to kinematic inconsistencies. This paper presents a comprehensive benchmark of three geometrically-aware sensor fusion architectures: a Dual Quaternion Geometric Observer (GeoDQ) using Screw Linear Interpolation (SCLERP), a manifold-aware Unscented Kalman Filter (UKF-M), and an Error-State Kalman Filter (ESKF). We reformulated the 6DoF sensor fusion problem on the SE(3) manifold to enable coordinate-free uncertainty propagation. We evaluated these approaches on the entire RoNIN dataset, utilizing optimized JIT-compiled implementations to assess real-time performance. Our extensive experimental results demonstrate that the GeoDQ method outperforms both ESKF and UKF-M in accuracy (RMSE: 0.046 m vs. 0.155 m and 0.264 m, respectively) while maintaining superior computational efficiency (~1.7 ms/step , comparable to ESKF and significantly faster than UKF-M). Furthermore, robustness tests under sparse position updates (up to 5 Hz) reveal that the geometric observer maintains stability where filtering methods degrade. This analysis confirms that dual quaternion-based observers offer a dominant solution for resource-constrained autonomous agents in GPS-denied environments.
+Autonomous agents operating in dynamic 3D environments require robust pose estimation that preserves the geometric structure of rigid-body motion. Traditional filtering approaches often decouple rotation and translation, leading to kinematic inconsistencies. This paper presents a comprehensive benchmark of three geometrically-aware sensor fusion architectures: a Dual Quaternion Geometric Observer (GeoDQ) using Screw Linear Interpolation (SCLERP), a manifold-aware Unscented Kalman Filter (UKF-M), and an Error-State Kalman Filter (ESKF). We reformulated the 6DoF sensor fusion problem on the SE(3) manifold to enable coordinate-free uncertainty propagation and evaluated these approaches on the entire RoNIN dataset (35 trajectories) using optimized JIT-compiled implementations. Extensive experimental results demonstrate that the proposed GeoDQ method significantly outperforms filtering baselines in accuracy, reducing the Root Mean Square Error (RMSE) by a factor of 3.7 compared to ESKF (0.038 m vs. 0.141 m) and 6.1 compared to UKF-M (0.038 m vs. 0.231 m). Furthermore, robustness analysis reveals that the geometric observer maintains superior tracking stability under sparse position updates (down to 7 Hz), significantly mitigating drift where filtering methods degrade. Despite the mathematical complexity of dual quaternion algebra, the optimized observer exhibits superior computational efficiency, executing ~10% faster than the standard ESKF and ~5 times faster than UKF-M. This performance confirms that dual quaternion-based observers provide a mathematically rigorous yet computationally lightweight solution suitable for high-frequency real-time estimation on resource-constrained embedded systems.
 
 **Keywords:** Geometric State Fusion, Dual Quaternion Interpolation, Error-State Kalman Filter (ESKF), Unscented Kalman Filter (UKF), SE(3) Pose Estimation, SCLERP, Robust Navigation, Computational Efficiency.
 
 ## Results
 
-### Trajectory Tracking Performance
+### Benchmark Summary (RoNIN Dataset)
+
+We evaluated the algorithms on 35 distinct trajectories. The table below summarizes the aggregated performance metrics, comparing standard Python implementations against Numba-optimized (JIT) versions.
+
+| Method | RMSE [m] (Mean ± Std) | Execution [ms] |
+| :--- | :--- | :--- |
+| **ESKF (Standard)** | 0.1409 ± 0.0213 | 9166.1 |
+| **ESKF (JIT)** | 0.1409 ± 0.0213 | 2807.8 |
+| **UKF-M (Standard)** | 0.2329 ± 0.0382 | 38362.3 |
+| **UKF-M (JIT)** | 0.2312 ± 0.0378 | 12773.8 |
+| **GeoDQ (Standard)** | **0.0377 ± 0.0081** | 18654.2 |
+| **GeoDQ (JIT)** | **0.0377 ± 0.0081** | **2430.3** |
+
+> **Key Finding:** The proposed **GeoDQ (JIT)** architecture achieves the lowest tracking error while maintaining the fastest execution time. Notably, the **standard deviation** for GeoDQ is significantly lower ($\pm 0.0081$) compared to ESKF ($\pm 0.0213$) and UKF-M ($\pm 0.0382$). This indicates that the Geometric Observer provides the most consistent and predictable performance across diverse motion patterns, minimizing outliers where filter-based methods tend to diverge.
+
+### Global Robustness Analysis
+
+![robustness](assets/global_robustness.png)
+
+*Global Robustness Analysis averaged over all 35 RoNIN trajectories. The plot illustrates the degradation of RMSE (Log Scale) as the position update interval increases (simulating VO/GPS outages). The **GeoDQ observer** (Red/Dashed) maintains sub-meter accuracy and structural stability even when updates are decimated to 7 Hz (Interval ~30). In contrast, Kalman Filter variants (ESKF, UKF) exhibit exponential error growth much earlier, confirming the observer's superior handling of non-linear error dynamics.*
+
+### Qualitative Tracking Performance
 
 ![trajectory](assets/a000_11_result.png)
 
-*Qualitative comparison on the RoNIN sequence `a000_11`. The 3D trajectory (top-left) and Top-Down projection (top-right) illustrate the tracking performance of ESKF (Purple), UKF-M (Blue), and the proposed GeoDQ (Red/Green dashed) against Ground Truth (Black). The error evolution plots (bottom) demonstrate that the Geometric Dual Quaternion observer maintains significantly lower translation error and variance compared to standard filter-based approaches.*
-
-### Robustness Analysis
-
-![robustness](assets/robustness_single.png)
-
-*Robustness analysis under sparse position updates (Sequence `a000_11`). The log-scale plot reveals the degradation of Root Mean Square Error (RMSE) as the time interval between external corrections increases (simulating GPS/VO loss). The proposed geometric observer (GeoDQ, Green/Dashed) exhibits superior structural stability, maintaining sub-meter accuracy even when updates are sparse, whereas Kalman Filter variants (ESKF, UKF) diverge exponentially.*
+*Example of trajectory tracking on sequence `a000_11`. The 3D trajectory (top-left) and Top-Down projection (top-right) illustrate the tracking path of ESKF (Purple), UKF-M (Blue), and the proposed GeoDQ (Red/Green dashed) against Ground Truth (Black).*
 
 ## Repository Structure
 
