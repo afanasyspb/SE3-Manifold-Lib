@@ -1,0 +1,11 @@
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+*/.ipynb_checkpoints
+
+# Python cache (появляется при запуске .py файлов)
+__pycache__
+*.pyc
+
+# Системные файлы (если вы на Mac/Windows)
+.DS_Store
+Thumbs.db
