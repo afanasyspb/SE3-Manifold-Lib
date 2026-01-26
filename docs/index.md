@@ -5,7 +5,7 @@
 ¹   Innopolis University, Innopolis, Russia  
 ²   Saint Petersburg Electrotechnical University "LETI", St. Petersburg, Russia  
 
-[arXiv Paper](INSERT_ARXIV_LINK_HERE) | [GitHub Code](https://github.com/afanasyspb/SE3-Manifold-Lib) | [RoNIN Dataset](INSERT_DATA_LINK_HERE)
+[arXiv Paper](INSERT_ARXIV_LINK_HERE) | [GitHub Code](https://github.com/afanasyspb/SE3-Manifold-Lib/blob/main/benchmarks/ronin_geodq_analysis.ipynb) | [RoNIN Dataset](https://ronin.cs.sfu.ca/)
 
 
 ## Abstract
