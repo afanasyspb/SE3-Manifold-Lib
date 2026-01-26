@@ -1,12 +1,16 @@
-# Geometric State Fusion for Autonomous Agents: A Comparative Analysis of Dual Quaternion Observer and Kalman Filters
+<div align="center">
+<h1>Geometric State Fusion for Autonomous Agents: A Comparative Analysis of Dual Quaternion Observer and Kalman Filters</h1>
 
-**Author:** Ilya Afanasyev ¹,²
+[**Ilya Afanasyev**](https://www.linkedin.com/in/ilya-afanasyev-8783291a/)<sup>1,2</sup>
 
-¹   Innopolis University, Innopolis, Russia  
-²   Saint Petersburg Electrotechnical University "LETI", St. Petersburg, Russia  
+<sup>1</sup>Innopolis University, Innopolis, Russia <br>
+<sup>2</sup>Saint Petersburg Electrotechnical University "LETI", St. Petersburg, Russia 
 
-[arXiv Paper](INSERT_ARXIV_LINK_HERE) | [GitHub Code](https://github.com/afanasyspb/SE3-Manifold-Lib/blob/main/benchmarks/ronin_geodq_analysis.ipynb) | [RoNIN Dataset](https://ronin.cs.sfu.ca/)
+<a href="#"><img src='https://img.shields.io/badge/arXiv-Geometric%20State%20Fusion-red' alt='Paper PDF'></a>
+<a href='https://github.com/afanasyspb/SE3-Manifold-Lib/tree/main/benchmarks'><img src='https://img.shields.io/badge/Code-GeoDQ%20Benchmark-yellow' alt='Benchmark'></a>
+<a href='https://ronin.cs.sfu.ca/'><img src='https://img.shields.io/badge/Data-RoNIN%20Dataset-blue' alt='Dataset'></a>
 
+</div>
 
 ## Abstract
 
