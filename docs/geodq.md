@@ -6,9 +6,10 @@
 <sup>1</sup>Innopolis University, Innopolis, Russia <br>
 <sup>2</sup>Saint Petersburg Electrotechnical University "LETI", St. Petersburg, Russia 
 
-<a href="INSERT_ARXIV_LINK_HERE"><img src='https://img.shields.io/badge/arXiv-Geometric%20State%20Fusion-red' alt='Paper PDF'></a>
-<a href='INSERT_GITHUB_LINK_HERE'><img src='https://img.shields.io/badge/Code-GeoDQ%20Benchmark-yellow' alt='Benchmark'></a>
-<a href='INSERT_DATA_LINK_HERE'><img src='https://img.shields.io/badge/Data-RoNIN%20Dataset-blue' alt='Dataset'></a>
+<!-- Placeholders for future links -->
+<a href="#"><img src='https://img.shields.io/badge/arXiv-Geometric%20State%20Fusion-red' alt='Paper PDF'></a>
+<a href='#'><img src='https://img.shields.io/badge/Code-GeoDQ%20Benchmark-yellow' alt='Benchmark'></a>
+<a href='#'><img src='https://img.shields.io/badge/Data-RoNIN%20Dataset-blue' alt='Dataset'></a>
 
 </div>
 
@@ -37,36 +38,36 @@ We evaluated the algorithms on 35 distinct trajectories. The table below summari
 
 ### Global Robustness Analysis
 
-![robustness](assets/global_robustness.png)
+![robustness](assets/geodq_bench/global_robustness.png)
 
 *Global Robustness Analysis averaged over all 35 RoNIN trajectories. The plot illustrates the degradation of RMSE (Log Scale) as the position update interval increases (simulating VO/GPS outages). The **GeoDQ observer** (Red/Dashed) maintains sub-meter accuracy and structural stability even when updates are decimated to 7 Hz (Interval ~30). In contrast, Kalman Filter variants (ESKF, UKF) exhibit exponential error growth much earlier, confirming the observer's superior handling of non-linear error dynamics.*
 
 ### Qualitative Tracking Performance
 
-![trajectory](assets/a000_11_result.png)
+![trajectory](assets/geodq_bench/a000_11_result.png)
 
 *Example of trajectory tracking on sequence `a000_11`. The 3D trajectory (top-left) and Top-Down projection (top-right) illustrate the tracking path of ESKF (Purple), UKF-M (Blue), and the proposed GeoDQ (Red/Green dashed) against Ground Truth (Black).*
 
 ## Repository Structure
 
-This repository contains the implementation of three sensor fusion architectures (ESKF, UKF, GeoDQ) along with their JIT-optimized variants.
+This project is part of the `SE3-Manifold-Lib` collection.
 
 ### 1. Benchmarking & Analysis
-*   **`RoNIN_Batch_Analysis_GeoDQ_JIT.ipynb`**: **(Main Entry Point)** The primary notebook that runs the full benchmark. It loads the filters, processes trajectories, calculates metrics (RMSE, ATE), performs the robustness test, and generates the plots/tables used in the paper.
-*   **`RoNIN_Dataset_Batch_Processing.ipynb`**: Data preparation utility. Converts the raw RoNIN dataset (HDF5) into the standardized CSV format required by the benchmark pipeline.
+*   **[`benchmarks/ronin_geodq_analysis.ipynb`](../benchmarks/ronin_geodq_analysis.ipynb)**: **(Main Entry Point)** The primary notebook that runs the full benchmark. It loads the filters, processes trajectories, calculates metrics (RMSE, ATE), performs the robustness test, and generates the plots/tables used in the paper.
+*   **[`tools/ronin_processor.ipynb`](../tools/ronin_processor.ipynb)**: Data preparation utility. Converts the raw RoNIN dataset (HDF5) into the standardized CSV format required by the benchmark pipeline.
 
 ### 2. Filter Implementations (Kernels)
-The core logic is decoupled into standalone Python modules. Each method has a standard version (for reference/debugging) and a Numba-optimized version (for performance benchmarking).
+The core logic is decoupled into standalone Python modules located in the `algorithms/` directory.
 
 | Method | Standard Implementation | JIT-Optimized Implementation | Description |
 | :--- | :--- | :--- | :--- |
-| **GeoDQ** | `GeoDQ_SCLERP.py` | `GeoDQ_SCLERP_JIT.py` | **(Proposed)** Dual Quaternion Geometric Observer using SCLERP. |
-| **UKF-M** | `UKFM_INS.py` | `UKFM_INS_JIT.py` | Manifold Unscented Kalman Filter on $SO(3) \times \mathbb{R}^3$. |
-| **ESKF** | `ESKF_INS.py` | `ESKF_INS_JIT.py` | Error-State Kalman Filter (Baseline). |
+| **GeoDQ** | [`algorithms/geodq/geodq_sclerp.py`](../algorithms/geodq/geodq_sclerp.py) | [`algorithms/geodq/geodq_sclerp_jit.py`](../algorithms/geodq/geodq_sclerp_jit.py) | **(Proposed)** Dual Quaternion Geometric Observer using SCLERP. |
+| **UKF-M** | [`algorithms/filters/ukfm.py`](../algorithms/filters/ukfm.py) | [`algorithms/filters/ukfm_jit.py`](../algorithms/filters/ukfm_jit.py) | Manifold Unscented Kalman Filter on $SO(3) \times \mathbb{R}^3$. |
+| **ESKF** | [`algorithms/filters/eskf.py`](../algorithms/filters/eskf.py) | [`algorithms/filters/eskf_jit.py`](../algorithms/filters/eskf_jit.py) | Error-State Kalman Filter (Baseline). |
 
 ### 3. Misc
 *   **`requirements.txt`**: List of Python dependencies required to run the code.
-*   **`assets/`**: Contains plots and visualization results.
+*   **`docs/assets/`**: Contains plots and visualization results.
 
 ## Citation
 
