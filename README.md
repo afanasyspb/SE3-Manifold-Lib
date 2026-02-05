@@ -16,7 +16,7 @@ Designed for Computer Vision, Robotics, and Navigation tasks.
 
 ### Installation & Environments
 
-# This repository supports two workflows requiring different environments.
+This repository supports two workflows requiring different environments.
 
 ### 1. Navigation Algorithms (ESKF, GeoDQ)
 Standard environment for manifold optimization algorithms.
