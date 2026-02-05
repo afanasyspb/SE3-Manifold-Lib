@@ -25,7 +25,7 @@ git clone https://github.com/afanasyspb/SE3-Manifold-Lib.git
 cd SE3-Manifold-Lib
 pip install -r requirements.txt
 
-### 2. Point Cloud Processing & CGA (LiDAR, SLAM)
+2. Point Cloud Processing & CGA (LiDAR, SLAM)
 Requires Python 3.10 due to Open3D compatibility. Please use the provided Conda environment.
 ```bash
 # Create the environment from file
