@@ -1,0 +1,14 @@
+name: kitti_cga_env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy>=1.21.0
+  - matplotlib>=3.5.0
+  - tqdm>=4.64.0
+  - scipy>=1.7.0
+  - pip:
+    - open3d
+    - clifford

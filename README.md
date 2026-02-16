@@ -14,9 +14,24 @@ Designed for Computer Vision, Robotics, and Navigation tasks.
 
 ## 🛠️ Setup & Usage
 
-### Installation
+### Installation & Environments
 
+This repository supports two workflows requiring different environments.
+
+### 1. Navigation Algorithms (ESKF, GeoDQ)
+Standard environment for manifold optimization algorithms.
 ```bash
 git clone https://github.com/afanasyspb/SE3-Manifold-Lib.git
 cd SE3-Manifold-Lib
 pip install -r requirements.txt
+```
+
+### 2. Point Cloud Processing & CGA (LiDAR, SLAM)
+Requires Python 3.10 due to Open3D compatibility. Please use the provided Conda environment.
+```bash
+# Create the environment from file
+conda env create -f environment_cga.yml
+
+# Activate
+conda activate kitti_cga_env
+```

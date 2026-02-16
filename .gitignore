@@ -8,4 +8,4 @@ __pycache__
 
 # Системные файлы (если вы на Mac/Windows)
 .DS_Store
-Thumbs.db
+Thumbs.db.ipynb_checkpoints/

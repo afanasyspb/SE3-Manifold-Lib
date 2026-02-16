@@ -6,47 +6,58 @@
   <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicons/favicon.svg">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+      color: #24292e;
       max-width: 900px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 40px 20px;
       line-height: 1.6;
     }
     h1 {
       text-align: center;
       font-size: 2em;
       margin-bottom: 10px;
+      font-weight: 600;
     }
     h2 {
-      border-bottom: 2px solid #eee;
-      padding-bottom: 10px;
-      margin-top: 40px;
+      border-bottom: 1px solid #eaecef;
+      padding-bottom: .3em;
+      margin-top: 24px;
+      font-size: 1.5em;
+      font-weight: 600;
+    }
+    a {
+      color: #0366d6;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
     .authors {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       font-size: 1.1em;
     }
     .affiliations {
       text-align: center;
       font-size: 0.9em;
-      color: #666;
+      color: #586069;
       margin-bottom: 20px;
     }
     .badges {
       text-align: center;
       margin-bottom: 40px;
     }
-    .badges a {
-      margin: 0 5px;
-      text-decoration: none;
+    .badges img {
+      margin: 0 4px;
+      vertical-align: middle;
     }
     p {
+      margin-bottom: 16px;
       text-align: justify;
     }
     
-    /* Стили для таблицы */
+    /* Table Styles */
     table {
       border-collapse: collapse;
       width: 100%;
@@ -54,19 +65,22 @@
       font-size: 0.95em;
     }
     th, td {
-      border: 1px solid #ddd;
-      padding: 12px;
-      text-align: left;
+      border: 1px solid #dfe2e5;
+      padding: 6px 13px;
     }
     th {
-      background-color: #f8f9fa;
-      font-weight: bold;
+      background-color: #f6f8fa;
+      font-weight: 600;
+      text-align: left;
     }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
+    tr:nth-child(2n) {
+      background-color: #f6f8fa;
+    }
+    .highlight-row {
+      background-color: #e6ffed !important; /* Light green highlight */
     }
 
-    /* Стили для картинок */
+    /* Image Styles */
     .img-container {
       text-align: center;
       margin: 30px 0;
@@ -74,32 +88,36 @@
     img.result-img {
       max-width: 100%;
       height: auto;
-      border: 1px solid #eee;
-      border-radius: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid #dfe2e5;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
     }
     .caption {
+      color: #586069;
       font-style: italic;
-      color: #555;
       margin-top: 8px;
       text-align: center;
       font-size: 0.9em;
+      max-width: 80%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* Стили для Citation (как вы хотели) */
+    /* Citation Block */
     .bibtex-container {
-      background-color: #f5f5f5;
-      border: 1px solid #e0e0e0;
-      border-radius: 5px;
-      padding: 15px;
-      overflow-x: auto;
+      background-color: #f6f8fa;
+      border-radius: 6px;
+      padding: 16px;
+      overflow: auto;
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+      font-size: 85%;
+      line-height: 1.45;
     }
-    pre {
-      margin: 0;
-      white-space: pre-wrap;
-      font-family: Consolas, Monaco, 'Andale Mono', monospace;
-      font-size: 0.9em;
-      color: #333;
+    blockquote {
+        margin: 0;
+        padding: 0 1em;
+        color: #6a737d;
+        border-left: 0.25em solid #dfe2e5;
     }
   </style>
 </head>
@@ -118,16 +136,15 @@
   </div>
 
   <div class="badges">
-    <!-- Links -->
     <a href="#"><img src='https://img.shields.io/badge/arXiv-Geometric%20State%20Fusion-red' alt='Paper PDF'></a>
-    <a href='https://github.com/afanasyspb/SE3-Manifold-Lib/blob/main/benchmarks/ronin_geodq_analysis.ipynb'><img src='https://img.shields.io/badge/Code-GeoDQ%20Benchmark-yellow' alt='Benchmark'></a>
+    <a href='https://github.com/afanasyspb/SE3-Manifold-Lib/tree/main/benchmarks'><img src='https://img.shields.io/badge/Code-GeoDQ%20Benchmark-yellow' alt='Benchmark'></a>
     <a href='https://ronin.cs.sfu.ca/'><img src='https://img.shields.io/badge/Data-RoNIN%20Dataset-blue' alt='Dataset'></a>
   </div>
 
   <!-- Abstract -->
   <h2>Abstract</h2>
   <p>
-    Autonomous agents operating in dynamic 3D environments require robust pose estimation that preserves the geometric structure of rigid-body motion. Traditional filtering approaches often decouple rotation and translation, leading to kinematic inconsistencies. This paper presents a comprehensive benchmark of three geometrically-aware sensor fusion architectures: a Dual Quaternion Geometric Observer (GeoDQ) using Screw Linear Interpolation (SCLERP), a manifold-aware Unscented Kalman Filter (UKF-M), and an Error-State Kalman Filter (ESKF). We reformulated the 6DoF sensor fusion problem on the SE(3) manifold to enable coordinate-free uncertainty propagation and evaluated these approaches on the entire RoNIN dataset (35 trajectories) using optimized JIT-compiled implementations. Extensive experimental results demonstrate that the proposed GeoDQ method significantly outperforms filtering baselines in accuracy, reducing the Root Mean Square Error (RMSE) by a factor of 3.7 compared to ESKF (0.038 m vs. 0.141 m) and 6.1 compared to UKF-M (0.038 m vs. 0.231 m). Furthermore, robustness analysis reveals that the geometric observer maintains superior tracking stability under sparse position updates (down to 7 Hz), significantly mitigating drift where filtering methods degrade. Despite the mathematical complexity of dual quaternion algebra, the optimized observer exhibits superior computational efficiency, executing ~10% faster than the standard ESKF and ~5 times faster than UKF-M. This performance confirms that dual quaternion-based observers provide a mathematically rigorous yet computationally lightweight solution suitable for high-frequency real-time estimation on resource-constrained embedded systems.
+    Autonomous agents operating in dynamic 3D environments require robust pose estimation that preserves the geometric structure of rigid-body motion. Traditional filtering approaches often decouple rotation and translation, leading to kinematic inconsistencies. This paper presents a comprehensive benchmark of three geometrically-aware sensor fusion architectures: a Dual Quaternion Geometric Observer (GeoDQ) using Screw Linear Interpolation (SCLERP), a manifold-aware Unscented Kalman Filter (UKF-M), and an Error-State Kalman Filter (ESKF). We reformulated the 6DoF sensor fusion problem on the SE(3) manifold to enable coordinate-free uncertainty propagation and evaluated these approaches on the entire RoNIN dataset (35 trajectories) using optimized JIT-compiled implementations. Extensive experimental results demonstrate that the proposed GeoDQ method outperforms filtering baselines by more than an order of magnitude in accuracy, reducing the Root Mean Square Error (RMSE) to <strong>0.0043 m</strong> compared to ESKF (0.141 m) and UKF-M (0.231 m). Furthermore, robustness analysis reveals that the geometric observer maintains superior tracking stability under sparse position updates, significantly mitigating drift where filtering methods degrade. Despite the mathematical complexity of dual quaternion algebra, the optimized observer exhibits superior computational efficiency, executing faster than both the standard ESKF and UKF-M implementations. This performance confirms that dual quaternion-based observers provide a mathematically rigorous yet computationally lightweight solution suitable for high-frequency real-time estimation on resource-constrained embedded systems.
   </p>
   <p><strong>Keywords:</strong> Geometric State Fusion, Dual Quaternion Interpolation, Error-State Kalman Filter (ESKF), Unscented Kalman Filter (UKF), SE(3) Pose Estimation, SCLERP, Robust Navigation, Computational Efficiency.</p>
 
@@ -166,52 +183,64 @@
       </tr>
       <tr>
         <td><strong>GeoDQ (Standard)</strong></td>
-        <td><strong>0.0377 ± 0.0081</strong></td>
-        <td>21054.7</td>
+        <td><strong>0.0043 ± 0.0009</strong></td>
+        <td>23472.6</td>
       </tr>
-      <tr>
-        <td style="background-color: #e8f5e9;"><strong>GeoDQ (JIT)</strong></td>
-        <td style="background-color: #e8f5e9;"><strong>0.0377 ± 0.0081</strong></td>
-        <td style="background-color: #e8f5e9;"><strong>2813.6</strong></td>
+      <tr class="highlight-row">
+        <td><strong>GeoDQ (JIT)</strong></td>
+        <td><strong>0.0043 ± 0.0009</strong></td>
+        <td><strong>3048.3</strong></td>
       </tr>
     </tbody>
   </table>
+  
+  <blockquote>
+      <strong>Key Finding:</strong> The proposed <strong>GeoDQ (JIT)</strong> architecture achieves the lowest tracking error while maintaining the fastest execution time. Notably, the standard deviation for GeoDQ is significantly lower (± 0.0009) compared to ESKF (± 0.0213) and UKF-M (± 0.0378), indicating superior consistency.
+  </blockquote>
 
-  <!-- Images -->
+  <!-- Robustness Analysis -->
   <h2>Global Robustness Analysis</h2>
   <div class="img-container">
-    <img src="assets/geodq_bench/global_robustness.png" class="result-img" alt="Robustness Analysis">
+    <img src="assets/geodq_bench/global_robustness.png" class="result-img" alt="Global Robustness Analysis">
     <div class="caption">
-      Global Robustness Analysis averaged over all 35 RoNIN trajectories. The plot illustrates the degradation of RMSE (Log Scale) as the position update interval increases. The GeoDQ observer (Red/Dashed) maintains sub-meter accuracy even when updates are decimated to 7 Hz.
+      Global Robustness Analysis averaged over all 35 RoNIN trajectories. The plot illustrates the degradation of RMSE (Log Scale) as the position update interval increases (simulating VO/GPS outages). The <strong>GeoDQ observer</strong> (Red/Dashed) demonstrates exceptional stability, maintaining a smooth error curve throughout the entire test range. Unlike Kalman Filter variants (ESKF, UKF), which show rapid error accumulation as updates become sparse, the geometric observer effectively mitigates drift even under severe data decimation, confirming its superior structural preservation of the SE(3) state.
     </div>
   </div>
 
+  <!-- Qualitative Results -->
   <h2>Qualitative Tracking Performance</h2>
   
   <div class="img-container">
     <img src="assets/geodq_bench/a000_11_result.png" class="result-img" alt="Trajectory a000_11">
-    <div class="caption">Example of trajectory tracking on sequence a000_11.</div>
+    <div class="caption">
+      Example of trajectory tracking on sequence <code>a000_11</code>. The 3D trajectory (top-left) and Top-Down projection (top-right) illustrate the tracking path of ESKF (Purple), UKF-M (Blue), and the proposed GeoDQ (Red/Green dashed) against Ground Truth (Black).
+    </div>
   </div>
 
   <div class="img-container">
     <img src="assets/geodq_bench/a025_2_result.png" class="result-img" alt="Trajectory a025_2">
-    <div class="caption">Example of trajectory tracking on sequence a025_2. Comparison of estimated paths against ground truth.</div>
+    <div class="caption">
+      Example of trajectory tracking on sequence <code>a025_2</code>. Comparison of estimated paths against ground truth, highlighting drift reduction by the Geometric Observer.
+    </div>
   </div>
 
   <div class="img-container">
     <img src="assets/geodq_bench/a043_3_result.png" class="result-img" alt="Trajectory a043_3">
-    <div class="caption">Example of trajectory tracking on sequence a043_3. The GeoDQ observer maintains tighter convergence.</div>
+    <div class="caption">
+      Example of trajectory tracking on sequence <code>a043_3</code>. The GeoDQ observer maintains tighter convergence to the ground truth path compared to filter-based approaches.
+    </div>
   </div>
 
   <!-- Citation Section -->
   <h2>Citation</h2>
+  <p>If you find this project useful, please consider citing:</p>
   <div class="bibtex-container">
-<pre><code>@inproceedings{afanasyev2026geometric,
+@inproceedings{afanasyev2026geometric,
   title={Geometric State Fusion for Autonomous Agents: A Comparative Analysis of Dual Quaternion Observer and Kalman Filters},
   author={Afanasyev, Ilya},
   booktitle={Proceedings of the 25th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2026)},
   year={2026}
-}</code></pre>
+}
   </div>
 
 </body>
