@@ -83,9 +83,20 @@ The core logic is decoupled into standalone Python modules located in the `algor
 If you find this project useful, please consider citing:
 
 ```bibtex
-@inproceedings{afanasyev2026geometric,
-  title={Geometric State Fusion for Autonomous Agents: A Comparative Analysis of Dual Quaternion Observer and Kalman Filters},
-  author={Afanasyev, Ilya},
-  booktitle={Proceedings of the 25th International Conference on Autonomous Agents and Multiagent Systems (AAMAS 2026)},
-  year={2026}
+@inproceedings{10.65109/CMZH8882,
+author = {Afanasyev, Ilya},
+title = {Geometric State Fusion for Autonomous Agents: A Comparative Analysis of Dual Quaternion Observer and Kalman Filters},
+year = {2026},
+isbn = {9798400723179},
+publisher = {International Foundation for Autonomous Agents and Multiagent Systems},
+address = {Richland, SC},
+url = {https://doi.org/10.65109/CMZH8882},
+doi = {10.65109/CMZH8882},
+abstract = {Autonomous agents operating in dynamic 3D environments require robust pose estimation that preserves the geometric structure of rigid-body motion. Traditional filtering approaches often decouple rotation and translation, leading to kinematic inconsistencies. This paper presents a comprehensive benchmark of three geometrically-aware architectures: a Dual Quaternion Geometric Observer (GeoDQ), a manifold-aware Unscented Kalman Filter (UKF-M), and an Error-State Kalman Filter (ESKF). We evaluate these on the complete RoNIN dataset (35 trajectories). Results demonstrate that the proposed GeoDQ method significantly outperforms filtering baselines, reducing RMSE by 3.7x compared to ESKF and 6.1x compared to UKF-M. Furthermore, robustness analysis reveals that the geometric observer maintains superior stability under sparse updates. Despite its mathematical rigor, GeoDQ is the most computationally efficient, executing 10\% faster than ESKF and 5x faster than UKF-M, making it ideal for resource-constrained embedded agents.},
+booktitle = {Proceedings of the 25th International Conference on Autonomous Agents and Multiagent Systems},
+pages = {3480–3482},
+numpages = {3},
+keywords = {dual quaternions, sensor fusion, se(3) manifold, autonomous agents, sclerp},
+location = {Paphos, Cyprus},
+series = {AAMAS '26}
 }
